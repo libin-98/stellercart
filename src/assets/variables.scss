@@ -1,0 +1,41 @@
+
+//common variables /// 
+$textColor1 : black;
+$textcolor2 : rgb(143, 141, 141) ;
+$textcolor3:#0042B2;
+$backGroundColor1 : rgb(249, 249, 229) ;
+$backGroundColor2 : rgb(239, 200, 239) ;
+$backGroundColor3 : #2867b2;
+$buttonColor1 : #427DF3 ;
+$buttonColor2 : rgb(19, 170, 19) ;
+$red : rgb(255, 23, 23) ;
+$theme : rgb(232, 201, 20) ;
+$borderColor1 : rgb(63, 57, 57);
+$borderColor2 : rgb(198, 197, 197) ;
+$margin-large : 20px ;
+$margin-medium : 10px ;
+$margin-small : 6px ;
+$inputBorder1 : #AEBFEB ;
+$white-color :#ffffff ;
+$black-color :#000000 ;
+// $text-blue-color : #003049;
+$textcolor4 : #023047;
+$greyBorder : #f2f2f2 ;
+$lightGray : #f1f1f1 ; 
+
+// common classes ///
+.button1{
+    padding: 25px;
+    border-radius: 6px;
+    background-color: $buttonColor1;
+    border: none;
+    outline: none;
+    color: white !important;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+

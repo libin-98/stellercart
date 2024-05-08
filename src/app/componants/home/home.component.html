@@ -1,0 +1,48 @@
+<ng-container *ngIf="productList.length > 0; else homePageProduct">
+    <div class="home-wrapper">
+        <div *ngFor="let item of productList , let index = index" #productListContainer (click)="expandDiv(item , index)" class="product-item" [ngStyle]="{
+        'background-image': 'url(\'' + item.product_photos[0] + '\')'}">
+            <div class="overlay">
+                <h2 class="title">{{ item.product_title.split("|")[0].split("(")[0]?.slice(0,21) }}</h2>
+                <p class="price">
+                    From
+                    {{ item?.typical_price_range ? item.typical_price_range[0] : "5999" }}
+                </p>
+            </div>
+            
+
+            <!-- <p>BASIC DEAILS</p> -->
+        </div>
+        <div *ngIf="showMoreDetails" class="more-details-container" [style.top]="expandTopHeight">
+            <h3 class="more-data-heading">MoreDetails</h3>
+            <p class="class=description">{{productExpandedDetails.description}}</p>
+            <ul>
+                <li *ngFor="let i of productExpandedDetails.atributes"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#0042B2" class="bi bi-arrow-up-right-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707z"/>
+                  </svg> {{i}}</li>
+            </ul>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #homePageProduct> 
+    <div class="home-page-product-container">
+        <div *ngFor="let item of homepageProductList">
+            <h2 class="category">{{item.category}}</h2>
+            <div class="home-wrapper">
+                <div *ngFor="let prod of item.products" class="product-item" [ngStyle]="{
+                'background-image': 'url(\'' + prod.product_photos[0] + '\')'}">
+                    <div class="overlay">
+                        <h2 class="title">{{ prod.product_title.split("|")[0].split("(")[0]?.slice(0,21) }}</h2>
+                        <p class="price">
+                            From
+                            {{ prod?.typical_price_range ? prod.typical_price_range[0] : "5999" }}
+                        </p>
+                    </div>
+        
+                    <!-- <p>BASIC DEAILS</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,41 @@
+<div class="wrapper">
+    <div class="wrapper-left">
+        <img class="logo" src="assets\images\steller-logo-color.png">
+    </div>
+    <div class="wrapper-right">
+        <div class="input-div" >
+               <mat-form-field appearance="outline">
+                <input matInput [formControl]="productName" placeholder="Search Products" matut (input)="filterProductList()" [matAutocomplete]="productAuto">
+                <mat-autocomplete #productAuto="matAutocomplete">
+                    <mat-option (onSelectionChange)="selectedProduct($event)" *ngFor="let product of filterdProductList"  [value]="product.name">
+                      {{product.name}}
+                    </mat-option>
+                    <mat-option  *ngIf="filterdProductList.length == 0" value="">No Items Found</mat-option>
+                  </mat-autocomplete>
+               </mat-form-field>
+        </div>
+        <div><mat-icon class="icon" routerLink="/user/wish-list">add_shopping_cart</mat-icon></div>
+        <div><mat-icon class="icon" (click)="menuToggle()">menu</mat-icon></div>
+    </div>
+    
+</div>
+<app-header-navbar></app-header-navbar>
+
+<div class="menu-wrapper" *ngIf="menuOPenToggle" >
+    <div class="menu-rest" (click)="menuToggle()"></div>
+    <div class="menu-container">
+        <div class="menu-items menu-header">
+            <div class="heder-left">
+                <div class="profile-outline-div"><mat-icon class="profile-icon">person_outline</mat-icon></div>
+                <p class="user-name">{{this.loggedUserDetails && this.loggedUserDetails.name ? this.loggedUserDetails.name : 'GUEST' | uppercase }}</p>
+            </div>
+            <mat-icon class="arrow-icon" (click)="menuToggle()">keyboard_arrow_right</mat-icon>
+        </div>
+        <p class="menu-items">My Orders</p>
+        <p class="menu-items">Make Payment</p>
+        <p class="menu-items">Customer Support</p>
+        <p class="menu-items">Legal</p>
+        <p class="menu-items">FAQs</p>
+        <p class="menu-items">Feedback</p>
+    </div>
+</div>

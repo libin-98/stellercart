@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'src/assets/variables.scss';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body{
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: $inputBorder1 !important;
+}
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading {
+    border-color: $inputBorder1 !important;
+}
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch {
+    border-color: $inputBorder1 !important;
+}
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: red !important;
+}
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__leading {
+    border-color: red !important;
+}
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__notch {
+    border-color: red !important;
+}
+app-header{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 102;
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+        border: none !important;
+        height: 46px !important;
+        // border-color: none !important;
+    }
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading {
+        border: none !important;
+        height: 46px !important;
+    }
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch {
+        border: none !important;
+        height: 46px !important;
+    }
+    .mat-mdc-form-field-subscript-wrapper{
+        display: none;
+    }
+    .mat-mdc-form-field-infix{
+        height: 46px !important;
+        min-height: 46px !important;
+        padding: 10px 0px !important ;
+    }
+    .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix{
+        // padding: 0px !important;
+    }
+}
+input{
+    border: none ; 
+    font-size: 15px;
+    &:focus{
+        outline : none ;
+        border: none;
+    }
+}
+
+p {
+    margin: 0px  !important;
+}
+h1{margin: 0px !important;}
+h2{margin: 0px !important;}
+h3{margin: 0px !important;}
+h4{margin: 0px !important;}
+h5{margin: 0px !important;}
+h6{margin: 0px !important;}
+ul{ margin: 0px !important;padding: 0px !important; }
