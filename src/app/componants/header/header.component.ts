@@ -11,11 +11,13 @@ import { RouterModule} from '@angular/router';
 import { HeaderNavbarComponent } from '../header-navbar/header-navbar.component';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { GeneralStateService } from 'src/app/Services/general-state.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule , MatInputModule , MatIconModule , FormsModule , ReactiveFormsModule , MatAutocompleteModule ,RouterModule , HeaderNavbarComponent],
+  imports: [CommonModule , MatInputModule , MatIconModule , FormsModule , ReactiveFormsModule , MatAutocompleteModule ,RouterModule , HeaderNavbarComponent , MatDialogModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -26,14 +28,12 @@ export class HeaderComponent  implements OnInit  {
   productName : FormControl = new FormControl ;
   menuOPenToggle : boolean = false ;
   loggedUserDetails : any ; 
+  loginStatus : boolean = false;
 
-  constructor(private generalService : GeneralService , private generalState : GeneralStateService){}
+  constructor(private generalService : GeneralService , private generalState : GeneralStateService , private matDialoge : MatDialog){}
   ngOnInit(): void {
     this.getProductList()
-    if(localStorage ){
-      let loggedUser : any  = localStorage.getItem('loggedUser')
-      this.loggedUserDetails = JSON.parse(loggedUser)
-    }
+    this.checkLoginStatus()
   }
 
   getProductList(){
@@ -50,13 +50,37 @@ export class HeaderComponent  implements OnInit  {
 
   menuToggle(){
     this.menuOPenToggle = !this.menuOPenToggle
-    console.log(this.menuOPenToggle)
   }
 
   selectedProduct(event : MatOptionSelectionChange){
     if(event.isUserInput){
       this.generalState.searchProduct = event.source.value;
       this.generalService.searchTrigger()
+      
+    }
+  }
+  login(){
+    if(!this.loginStatus){
+      this.matDialoge.open(LoginComponent , { width : '40%'}).afterClosed().subscribe((res: boolean)=>{
+        if(res){
+          this.checkLoginStatus()
+        }
+      })
+    }
+    else{
+      localStorage.removeItem('loggedUser')
+      this.checkLoginStatus()
+    }
+    
+  }
+  checkLoginStatus(){
+    if(localStorage ){
+      let loggedUser : any  = localStorage.getItem('loggedUser')
+      this.loggedUserDetails = JSON.parse(loggedUser)
+      if(this.loggedUserDetails)
+        this.loginStatus = true
+      else  
+        this.loginStatus = false
       
     }
   }
