@@ -6,14 +6,14 @@ import { HomeBaseComponent } from './componants/home/home-base/home-base.compone
 import { CartComponent } from './componants/cart/cart.component';
 
 const routes: Routes = [
-  {path : '' , redirectTo : 'login' , pathMatch: 'full'},
-  {path : 'login' , component : LoginComponent} ,
-  {path : 'user' , component : HomeBaseComponent , children: [
-    {path : '' , redirectTo : 'home' , pathMatch: 'full'},
-    {path : "home" , component : HomeComponent },
-    {path : "wish-list" , component : CartComponent }
-  ]} ,
-  // {path : 'home'  , component}
+  {
+    path: '',loadComponent: () => import('./componants/home/home-base/home-base.component').then(c => c.HomeBaseComponent),
+    children : [
+      {path : '' , redirectTo : 'home' , pathMatch: 'full'},
+      {path : "home" , loadComponent :()=>import('./componants/home/home.component').then(c => c.HomeComponent)},
+      {path : "wish-list" , loadComponent : ()=>import('./componants/cart/cart.component').then(c=>c.CartComponent)}
+    ]
+  }
 ];
 
 @NgModule({
