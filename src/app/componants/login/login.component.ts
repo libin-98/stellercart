@@ -9,7 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { generalHelper } from 'src/app/Helpers/generalhelper';
 import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
@@ -27,23 +27,21 @@ export class LoginComponent {
   loginForm : FormGroup = this.generalAdaptor.loginForm()
   public loginErr :boolean = false;
   public passWordVisible : boolean = false
-  constructor(private generalService : GeneralService , private  router : Router , private dialoge : MatDialog){}
+  constructor(private generalService : GeneralService , private  router : Router , private dialoge : MatDialog , private matDialogRef : MatDialogRef<LoginComponent>){}
   login(){
     if(this.loginForm.valid){
       this.generalService.login().subscribe({
         next : (res : any)=>{
-          console.log(res.registerdUsers);
           if(this.generalHelper.checkLogin(res.registerdUsers,this.loginForm.value)){
             this.loginErr = false;
-            this.router.navigate(['/user'])
+            this.matDialogRef.close(true)
+            
           }else{
             this.loginErr = true;
-            
           }
            
         },
         error: (err:HttpErrorResponse)=> {
-          console.log(err);
           
         },
       })

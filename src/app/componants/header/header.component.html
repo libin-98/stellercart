@@ -26,8 +26,8 @@
     <div class="menu-container">
         <div class="menu-items menu-header">
             <div class="heder-left">
-                <div class="profile-outline-div"><mat-icon class="profile-icon">person_outline</mat-icon></div>
-                <p class="user-name">{{this.loggedUserDetails && this.loggedUserDetails.name ? this.loggedUserDetails.name : 'GUEST' | uppercase }}</p>
+                <div class="profile-outline-div"><mat-icon class="profile-icon" >person_outline</mat-icon></div>
+                <p class="user-name">{{loginStatus ? loggedUserDetails.name : 'GUEST' | uppercase }}</p>
             </div>
             <mat-icon class="arrow-icon" (click)="menuToggle()">keyboard_arrow_right</mat-icon>
         </div>
@@ -37,5 +37,6 @@
         <p class="menu-items">Legal</p>
         <p class="menu-items">FAQs</p>
         <p class="menu-items">Feedback</p>
+        <p class="menu-items" [class.logout]="!loginStatus" (click)="login()">{{loggedUserDetails ? 'Logout' : 'Login'}}</p>
     </div>
 </div>
